@@ -120,3 +120,31 @@ button {
   padding-left: 0.25em;
   margin-left: -0.5em;
 }
+
+.wrapper {
+  display: flex; 
+  flex-wrap: wrap;
+}
+.tittle{
+  font-size: 0.65rem;
+}
+.card-img{
+  border-radius: 50%;
+  box-shadow: 7px 7px 17px rgba(66, 0, 247, 0.25);
+  margin: 8px;
+}
+h1{
+  text-align: center;
+}
+.control-button{
+  display: flex;
+  justify-content: center;
+}
+.form-action-2{
+  display: flex;
+  justify-content: center;
+}
+button[type=submit]{
+  background: black;
+  color: white;
+}
