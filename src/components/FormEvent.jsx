@@ -11,7 +11,7 @@ export default function FormEvent({ onSubmit, currentUser }) {
   return (
     <form onSubmit={onSubmit}>
       <fieldset id="fieldset">
-        <p>Claim your certificate, {currentUser.accountId}!</p>
+        <p>Generate your event, {currentUser.accountId}!</p>
         <p className="highlight">
           <label htmlFor="message">ID Certificate:</label>
           <input autoComplete="off" autoFocus id="message" required />
@@ -52,7 +52,7 @@ export default function FormEvent({ onSubmit, currentUser }) {
           <span title="NEAR Tokens">Ⓝ</span>
         </p> */}
         <p className="form-action">
-          <button type="submit">Claim your certificate</button>
+          <button type="submit">Generate your certificate</button>
         </p>
       </fieldset>
     </form>
