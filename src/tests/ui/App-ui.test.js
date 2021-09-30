@@ -11,8 +11,11 @@ const contract = {
     accountId: "test.near",
   },
   contractId: "test.near",
+  getAllMessages: () => new Promise(() => {}),
   getMessages: () => new Promise(() => {}),
+  getAllEvents: () => new Promise(() => {}),
   addMessage: () => "",
+  addEvent: () => "",
 };
 const walletConnection = {
   account: () => ({ _state: { amount: "1" + "0".repeat(25) } }),

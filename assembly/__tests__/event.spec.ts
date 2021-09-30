@@ -1,44 +1,35 @@
-import { addMessage, getAllMessages, addEvent, getAllEvents } from '../main';
-import { PostedMessage, messages } from '../model';
+import { addEvent, getAllEvents } from '../main';
+import { PostedEvent, events } from '../model';
 import { VMContext, Context, u128 } from 'near-sdk-as';
 
-function createMessage(text: string): PostedMessage {
-  return new PostedMessage(text);
+function createEvent(text: string, code: string, dateStart: string, dateEnd: string): PostedEvent {
+  return new PostedEvent(text, code, dateStart, dateEnd);
 }
 
-const message = createMessage('hello world');
+const message = createEvent('hello world', '2863643', '2021-09-30', '2021-10-02');
 
 describe('message tests', () => {
   afterEach(() => {
-    while(messages.length > 0) {
-      messages.pop();
+    while(events.length > 0) {
+      events.pop();
     }
   });
 
   it('adds a message', () => {
-    addMessage('hello world');
-    expect(messages.length).toBe(
+    addEvent('hello world', '2863643', '2021-09-30', '2021-10-02');
+    expect(events.length).toBe(
       1,
       'should only contain one message'
     );
-    expect(messages[0]).toStrictEqual(
+    expect(events[0]).toStrictEqual(
       message,
       'message should be "hello world"'
     );
   });
 
-  it('adds a premium message', () => {
-    VMContext.setAttached_deposit(u128.from('10000000000000000000000'));
-    addMessage('hello world');
-    const messageAR = getAllMessages();
-    expect(messageAR[0].premium).toStrictEqual(true,
-      'should be premium'
-    );
-  });
-
   it('retrieves messages', () => {
-    addMessage('hello world');
-    const messagesArr = getAllMessages();
+    addEvent('hello world', '2863643', '2021-09-30', '2021-10-02');
+    const messagesArr = getAllEvents();
     expect(messagesArr.length).toBe(
       1,
       'should be one message'
@@ -50,14 +41,14 @@ describe('message tests', () => {
   });
 
   it('only show the last 10 messages', () => {
-    addMessage('hello world');
-    const newMessages: PostedMessage[] = [];
+    addEvent('hello world', '2863643', '2021-09-30', '2021-10-02');
+    const newMessages: PostedEvent[] = [];
     for(let i: i32 = 0; i < 10; i++) {
       const text = 'message #' + i.toString();
-      newMessages.push(createMessage(text));
-      addMessage(text);
+      newMessages.push(createEvent(text, '2863643', '2021-09-30', '2021-10-02'));
+      addEvent(text, '2863643', '2021-09-30', '2021-10-02');
     }
-    const messages = getAllMessages();
+    const messages = getAllEvents();
     log(messages.slice(7, 10));
     expect(messages).toStrictEqual(
       newMessages,
@@ -79,7 +70,7 @@ describe('attached deposit tests', () => {
   it('attaches a deposit to a contract call', () => {
     log('Initial account balance: ' + Context.accountBalance.toString());
 
-    addMessage('hello world');
+    addEvent('hello world', '2863643', '2021-09-30', '2021-10-02');
     VMContext.setAttached_deposit(u128.from('10'));
 
     log('Attached deposit: 10');

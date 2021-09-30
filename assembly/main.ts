@@ -5,6 +5,10 @@ import { PostedMessage, messages, PostedEvent, events } from './model';
 // The maximum number of latest messages the contract returns.
 const MESSAGE_LIMIT = 10;
 
+
+/// CERTIFICATES
+
+
 /**
  * Adds a new message under the name of the sender's account id.\
  * NOTE: This is a change method. Which means it will modify the state.\
@@ -17,24 +21,7 @@ export function addMessage(text: string): void {
   messages.push(message);
 }
 
-/**
- * Returns an array of last N messages.\
- * NOTE: This is a view method. Which means it should NOT modify the state.
- */
-const curr =  "tammm.testnet"
-export function getMessages(accountId: string): PostedMessage[] { // currentUser: string
-  const numMessages = min(MESSAGE_LIMIT, messages.length);
-  const startIndex = messages.length - numMessages;
-  const result = new Array<PostedMessage>(numMessages);
-  for(let i = 0; i < numMessages; i++) {
-    result[i] = messages[i + startIndex];
-  }
-  // let curr =  "tammm.testnet"
-  // curr = accountId;
- 
-  const resultf = result.filter(message => message.sender == curr);
-  return resultf;
-}
+
 
 /**
  * Returns an array of last N messages.\
@@ -50,22 +37,9 @@ export function getMessages(accountId: string): PostedMessage[] { // currentUser
   return result;
 }
 
-/**
- * Returns an array of last N messages.\
- * NOTE: This is a view method. Which means it should NOT modify the state.
- */
-//  export function getMessages(): PostedMessage[] {
-//   const numMessages = min(MESSAGE_LIMIT, messages.length);
-//   const startIndex = messages.length - numMessages;
-//   const result = new Array<PostedMessage>(numMessages);
-//   for(let i = 0; i < numMessages; i++) {
-//     result[i] = messages[i + startIndex];
-//   }
-//   return result;
-// }
-
 
 /// EVENTS
+
 
 /**
  * Adds a new message under the name of the sender's account id.\
@@ -92,3 +66,19 @@ export function getMessages(accountId: string): PostedMessage[] { // currentUser
   }
   return result;
 }
+
+/**
+ * Returns an array of last N messages.\
+ * NOTE: This is a view method. Which means it should NOT modify the state.
+ */
+//  const curr =  "tammm.testnet"
+//  export function getMessages(accountId: string): PostedMessage[] { // currentUser: string
+//    const numMessages = min(MESSAGE_LIMIT, messages.length);
+//    const startIndex = messages.length - numMessages;
+//    const result = new Array<PostedMessage>(numMessages);
+//    for(let i = 0; i < numMessages; i++) {
+//      result[i] = messages[i + startIndex];
+//    }
+//    const resultf = result.filter(message => message.sender == curr);
+//    return resultf;
+//  }
