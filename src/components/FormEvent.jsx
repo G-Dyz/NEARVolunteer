@@ -13,7 +13,7 @@ export default function FormEvent({ onSubmit, currentUser }) {
       <fieldset id="fieldset">
         <p>Generate your event, {currentUser.accountId}!</p>
         <p className="highlight">
-          <label htmlFor="message">ID Certificate:</label>
+          <label htmlFor="message">Certificate:</label>
           <input autoComplete="off" autoFocus id="message" required />
         </p>
         <p className="highlight">

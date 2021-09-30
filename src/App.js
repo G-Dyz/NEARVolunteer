@@ -33,7 +33,7 @@ const App = ({ contract, currentUser, nearConfig, wallet }) => {
   useEffect(() => {
     // TODO: don't just fetch once; subscribe!
 
-    contract.getAllMessages().then((messages) => {
+    contract.getAllCertificates().then((messages) => {
       setMessages(filterMessage(messages));
       // setMessages(messages);
     });
@@ -59,7 +59,7 @@ const App = ({ contract, currentUser, nearConfig, wallet }) => {
       const event = filterEventByCode(events, message.value);
       if (event != null && event[0] != null) {
         contract
-          .addMessage(
+          .addCertificate(
             {
               text: event[0].text,
             },
@@ -69,7 +69,7 @@ const App = ({ contract, currentUser, nearConfig, wallet }) => {
             //   .toFixed()
           )
           .then(() => {
-            contract.getAllMessages().then((messages) => {
+            contract.getAllCertificates().then((messages) => {
               setMessages(filterMessage(messages));
               // setMessages(messages);
               message.value = "";
@@ -171,9 +171,9 @@ const App = ({ contract, currentUser, nearConfig, wallet }) => {
 
 App.propTypes = {
   contract: PropTypes.shape({
-    addMessage: PropTypes.func.isRequired,
-    getMessages: PropTypes.func.isRequired,
-    getAllMessages: PropTypes.func.isRequired,
+    addCertificate: PropTypes.func.isRequired,
+    getCertificates: PropTypes.func.isRequired,
+    getAllCertificates: PropTypes.func.isRequired,
   }).isRequired,
   currentUser: PropTypes.shape({
     accountId: PropTypes.string.isRequired,

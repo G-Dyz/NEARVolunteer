@@ -6,56 +6,61 @@ function createEvent(text: string, code: string, dateStart: string, dateEnd: str
   return new PostedEvent(text, code, dateStart, dateEnd);
 }
 
-const message = createEvent('hello world', '2863643', '2021-09-30', '2021-10-02');
+const path = 'https://cdn.pixabay.com/photo/image_certificate.jpg';
+const code = '2863643';
+const dateStart = '2021-09-30';
+const dateEnd = '2021-10-02';
 
-describe('message tests', () => {
+const event = createEvent(path, code, dateStart, dateEnd);
+
+describe('events tests', () => {
   afterEach(() => {
     while(events.length > 0) {
       events.pop();
     }
   });
 
-  it('adds a message', () => {
-    addEvent('hello world', '2863643', '2021-09-30', '2021-10-02');
+  it('adds an event', () => {
+    addEvent(path, code, dateStart, dateEnd);
     expect(events.length).toBe(
       1,
-      'should only contain one message'
+      'should only contain one event'
     );
     expect(events[0]).toStrictEqual(
-      message,
-      'message should be "hello world"'
+       event,
+      'event should be a path'
     );
   });
 
-  it('retrieves messages', () => {
-    addEvent('hello world', '2863643', '2021-09-30', '2021-10-02');
+  it('retrieves events', () => {
+    addEvent(path, code, dateStart, dateEnd);
     const messagesArr = getAllEvents();
     expect(messagesArr.length).toBe(
       1,
-      'should be one message'
+      'should be one event'
     );
     expect(messagesArr).toIncludeEqual(
-      message,
-      'messages should include:\n' + message.toJSON()
+      event,
+      'event should include:\n' + event.toJSON()
     );
   });
 
-  it('only show the last 10 messages', () => {
-    addEvent('hello world', '2863643', '2021-09-30', '2021-10-02');
-    const newMessages: PostedEvent[] = [];
+  it('only show the last 10 events', () => {
+    addEvent(path, code, dateStart, dateEnd);
+    const newEvents: PostedEvent[] = [];
     for(let i: i32 = 0; i < 10; i++) {
-      const text = 'message #' + i.toString();
-      newMessages.push(createEvent(text, '2863643', '2021-09-30', '2021-10-02'));
-      addEvent(text, '2863643', '2021-09-30', '2021-10-02');
+      const text = 'event #' + i.toString();
+      newEvents.push(createEvent(text, code, dateStart, dateEnd));
+      addEvent(text, code, dateStart, dateEnd);
     }
-    const messages = getAllEvents();
-    log(messages.slice(7, 10));
-    expect(messages).toStrictEqual(
-      newMessages,
-      'should be the last ten messages'
+    const events = getAllEvents();
+    log(events.slice(7, 10));
+    expect(events).toStrictEqual(
+       newEvents,
+      'should be the last ten events'
     );
-    expect(messages).not.toIncludeEqual(
-      message,
+    expect(events).not.toIncludeEqual(
+      event,
       'shouldn\'t contain the first element'
     );
   });
@@ -70,7 +75,7 @@ describe('attached deposit tests', () => {
   it('attaches a deposit to a contract call', () => {
     log('Initial account balance: ' + Context.accountBalance.toString());
 
-    addEvent('hello world', '2863643', '2021-09-30', '2021-10-02');
+    addEvent(path, code, dateStart, dateEnd);
     VMContext.setAttached_deposit(u128.from('10'));
 
     log('Attached deposit: 10');
