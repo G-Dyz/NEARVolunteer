@@ -2,7 +2,12 @@ import React from "react";
 import PropTypes from "prop-types";
 import Big from "big.js";
 
-export default function Form({ onSubmit, currentUser }) {
+export default function FormEvent({ onSubmit, currentUser }) {
+  const currentDay = new Date().toISOString().substring(0, 10);
+  var curr = new Date();
+  curr.setDate(curr.getDate() + 2);
+  const expirationDay = curr.toISOString().substr(0, 10);
+
   return (
     <form onSubmit={onSubmit}>
       <fieldset id="fieldset">
@@ -10,6 +15,28 @@ export default function Form({ onSubmit, currentUser }) {
         <p className="highlight">
           <label htmlFor="message">ID Certificate:</label>
           <input autoComplete="off" autoFocus id="message" required />
+        </p>
+        <p className="highlight">
+          <label htmlFor="dateStart">Date Start:</label>
+          <input
+            type="date"
+            autoComplete="off"
+            autoFocus
+            id="dateStart"
+            defaultValue={currentDay}
+            required
+          />
+        </p>
+        <p className="highlight">
+          <label htmlFor="dateEnd">Date End:</label>
+          <input
+            type="date"
+            autoComplete="off"
+            autoFocus
+            id="dateEnd"
+            defaultValue={expirationDay}
+            required
+          />
         </p>
         {/* <p>
           <label htmlFor="donation">Donation (optional):</label>
@@ -32,7 +59,7 @@ export default function Form({ onSubmit, currentUser }) {
   );
 }
 
-Form.propTypes = {
+FormEvent.propTypes = {
   onSubmit: PropTypes.func.isRequired,
   currentUser: PropTypes.shape({
     accountId: PropTypes.string.isRequired,
