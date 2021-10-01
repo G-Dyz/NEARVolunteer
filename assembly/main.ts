@@ -15,13 +15,6 @@ const ITEMS_LIMIT = 10;
  * NOTE: This is a change method. Which means it will modify the state.\
  * But right now we don't distinguish them with annotations yet.
  */
-// export function addCertificate2(text: string): void {
-//   // Creating a new certificate and populating fields with our data
-//   const certificate = new PostedCertificate(text);
-//   // Adding the certificate to end of the the persistent collection
-//   certificates.push(certificate);
-// }
-
 
 export function addCertificate(text: string): bool {
   const numEvents = min(ITEMS_LIMIT, events.length);
@@ -35,18 +28,6 @@ export function addCertificate(text: string): bool {
       return true
     }
   }
-  // ---
-  // const numCertificates = min(ITEMS_LIMIT, certificates.length);
-  // const startIndex = certificates.length - numCertificates;
-  // for(let i = 0; i < numCertificates; i++) {
-  //   if(events[i + startIndex].codeEvent == text){
-  //     // Creating a new certificate and populating fields with our data
-  //     const certificate = new PostedCertificate(events[i + startIndex].text);
-  //     // Adding the certificate to end of the the persistent collection
-  //     certificates.push(certificate);
-  //     return true
-  //   }
-  // }
   return false
 }
 
@@ -94,19 +75,3 @@ export function addCertificate(text: string): bool {
   }
   return result;
 }
-
-/**
- * Returns an array of last N events.\
- * NOTE: This is a view method. Which means it should NOT modify the state.
- */
-//  const curr =  "tammm.testnet"
-//  export function getEvents(accountId: string): PostedCertificate[] { // currentUser: string
-//    const numEvents = min(ITEM_LIMIT, events.length);
-//    const startIndex = events.length - numEvents;
-//    const result = new Array<PostedCertificate>(numEvents);
-//    for(let i = 0; i < numEvents; i++) {
-//      result[i] = events[i + startIndex];
-//    }
-//    const resultf = result.filter(event => event.sender == curr);
-//    return resultf;
-//  }
