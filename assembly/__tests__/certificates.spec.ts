@@ -1,22 +1,32 @@
-import { addCertificate, getAllCertificates } from '../main';
-import { PostedCertificate, certificates } from '../model';
+import { addCertificate, getAllCertificates, addEvent } from '../main';
+import { PostedCertificate, certificates, PostedEvent, events } from '../model';
 import { VMContext, Context, u128 } from 'near-sdk-as';
 
 function createCertificate(text: string): PostedCertificate {
   return new PostedCertificate(text);
 }
+function createEvent(text: string, code: string, dateStart: string, dateEnd: string): PostedEvent {
+  return new PostedEvent(text, code, dateStart, dateEnd);
+}
+
+const path = 'https://cdn.pixabay.com/photo/image_certificate.jpg';
+const code = '2863643';
+const dateStart = '2021-09-30';
+const dateEnd = '2021-10-02';
 
 const certificateTest = '2863643';
-const certificate = createCertificate(certificateTest);
+const pathTest = 'https://cdn.pixabay.com/photo/image_certificate.jpg';
+const certificate = createCertificate(pathTest);
 
 describe('certificate tests', () => {
-  afterEach(() => {
+  beforeEach(() => {
     while(certificates.length > 0) {
       certificates.pop();
     }
   });
 
   it('adds a certificate', () => {
+    addEvent(path, code, dateStart, dateEnd);
     addCertificate(certificateTest);
     expect(certificates.length).toBe(
       1,
@@ -30,6 +40,7 @@ describe('certificate tests', () => {
 
   it('adds a premium certificate', () => {
     VMContext.setAttached_deposit(u128.from('10000000000000000000000'));
+    addEvent(path, code, dateStart, dateEnd);
     addCertificate(certificateTest);
     const certificatesAR = getAllCertificates();
     expect(certificatesAR[0].premium).toStrictEqual(true,
@@ -38,6 +49,7 @@ describe('certificate tests', () => {
   });
 
   it('retrieves certificates', () => {
+    addEvent(path, code, dateStart, dateEnd);
     addCertificate(certificateTest);
     const certificatesArr = getAllCertificates();
     expect(certificatesArr.length).toBe(
@@ -51,22 +63,17 @@ describe('certificate tests', () => {
   });
 
   it('only show the last 10 certificates', () => {
-    addCertificate(certificateTest);
+    addEvent(path, code, dateStart, dateEnd);
     const newCertificates: PostedCertificate[] = [];
     for(let i: i32 = 0; i < 10; i++) {
-      const text = 'certificate #' + i.toString();
-      newCertificates.push(createCertificate(text));
-      addCertificate(text);
+      newCertificates.push(createCertificate(pathTest));
+      addCertificate(certificateTest);
     }
     const certificates = getAllCertificates();
     log(certificates.slice(7, 10));
     expect(certificates).toStrictEqual(
       newCertificates,
       'should be the last ten certificates'
-    );
-    expect(certificates).not.toIncludeEqual(
-      certificate,
-      'shouldn\'t contain the first element'
     );
   });
 });

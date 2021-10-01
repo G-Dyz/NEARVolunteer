@@ -64,7 +64,7 @@ https://www.figma.com/file/I7oewIevwZP5LAAsPOUel0/Untitled?node-id=7%3A49
 
 
 ## Commands
-near view tammm.testnet getAllEvent5s 
+near view tammm.testnet getAllEvents 
 
 near view tammm.testnet getAllCertificates 
 

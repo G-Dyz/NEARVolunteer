@@ -13,6 +13,8 @@ const code = "2863643";
 const dateStart = "2021-09-30";
 const dateEnd = "2021-10-02";
 
+jest.setTimeout(120000);
+
 beforeAll(async function () {
   near = await nearlib.connect(nearConfig);
   accountId = nearConfig.contractName;
