@@ -12,28 +12,29 @@ beforeAll(async function () {
   near = await nearlib.connect(nearConfig);
   accountId = nearConfig.contractName;
   contract = await near.loadContract(nearConfig.contractName, {
-    viewMethods: ["getAllMessages"],
-    changeMethods: ["addMessage"],
+    viewMethods: ["getAllCertificates"],
+    changeMethods: ["addCertificate"],
     sender: accountId,
   });
 });
 
-it("send one message and retrieve it", async () => {
-  await contract.addMessage({ text: "aloha" });
-  const msgs = await contract.getAllMessages();
-  const expectedMessagesResult = [
+it("send one certificate and retrieve it", async () => {
+  await contract.addCertificate({ text: "aloha" });
+  const msgs = await contract.getAllCertificates();
+  const expectedCertificatessResult = [
     {
+      active: true,
       premium: false,
       sender: accountId,
       text: "aloha",
     },
   ];
-  expect(msgs).toEqual(expectedMessagesResult);
+  expect(msgs).toEqual(expectedCertificatessResult);
 });
 
-it("send two more messages and expect three total", async () => {
-  await contract.addMessage({ text: "foo" });
-  await contract.addMessage({ text: "bar" });
-  const msgs = await contract.getAllMessages();
+it("send two more certificates and expect three total", async () => {
+  await contract.addCertificate({ text: "foo" });
+  await contract.addCertificate({ text: "bar" });
+  const msgs = await contract.getAllCertificates();
   expect(msgs.length).toEqual(3);
 });

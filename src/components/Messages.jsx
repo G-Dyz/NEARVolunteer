@@ -1,14 +1,18 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-export default function Messages({ messages, title }) {
+export default function Messages({ messages, title, type }) {
   return (
     <>
       <h2>{title}</h2>
       <div className="wrapper">
         {messages.map((message, i) => (
           // TODO: format as cards, add timestamp
-          <p key={i} className={message.premium ? "is-premium" : ""}>
+          <p
+            key={i}
+            className={message.premium ? "is-premium" : ""}
+            className="card"
+          >
             <img
               src={message.text}
               width="95"
@@ -17,13 +21,26 @@ export default function Messages({ messages, title }) {
             ></img>
             <br />
             {/* <p>{JSON.stringify(message)}</p> */}
-            {message.codeEvent && <span>{message.codeEvent}</span>}
-            <br />
-            {message.dateStart && <span>{message.dateStart}</span>}
-            <br />
-            {message.dateEnd && <span>{message.dateEnd}</span>}
-            <br />
-            <strong className="tittle">{message.sender}</strong>
+            {type == "event" ? (
+              <>
+                {message.codeEvent && (
+                  <span className="data-information">{message.codeEvent}</span>
+                )}
+                <br />
+                {message.dateStart && (
+                  <span className="date-information">
+                    From {message.dateStart} to
+                  </span>
+                )}
+                <br />
+                {message.dateEnd && (
+                  <span className="date-information">{message.dateEnd}</span>
+                )}
+                <br />
+              </>
+            ) : null}
+
+            <i className="tittle">{message.sender}</i>
             {/* {message.text} */}
           </p>
         ))}

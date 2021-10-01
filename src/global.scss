@@ -12,6 +12,9 @@ html {
   --secondary: var(--royal);
   --tertiary: #FF585D;
 
+  --primary-color: #0071BA;
+  --secondary-color: #212121;
+
   background-color: var(--bg);
   color: var(--fg);
   font-family: -apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica,Arial,sans-serif;
@@ -35,16 +38,29 @@ html {
   }
 }
 
-body {
-  margin: 0 auto;
-  padding: 0 1em;
-  max-width: 40em;
+*,body, html {
+  // margin: 0 auto;
+  // padding: 0 1em;
+  // max-width: 40em;
+  margin: 0;
+  padding: 0;
 }
-
+// .page{
+//   margin: 0 auto;
+// }
+header{
+  margin: auto;
+  display: flex;
+  // justify-self: center;
+  align-self: center;
+}
 fieldset {
   border: none;
   margin: 0;
   padding: 0;
+}
+fieldset p{
+  padding-bottom: 10px;
 }
 
 .highlight {
@@ -124,9 +140,14 @@ button {
 .wrapper {
   display: flex; 
   flex-wrap: wrap;
+  justify-content: center;
+
 }
 .tittle{
   font-size: 0.65rem;
+}
+.card{
+ text-align: center;
 }
 .card-img{
   border-radius: 50%;
@@ -147,4 +168,107 @@ h1{
 button[type=submit]{
   background: black;
   color: white;
+}
+.data-information{
+  font-size: 0.75rem;
+}
+.date-information{
+  font-size: 0.5rem;
+}
+
+.header-page{
+  background: var(--primary-color);
+  display: flex;
+  justify-content: center;
+  color:white;
+}
+.footer-page{
+  background: var(--secondary-color);
+  display: flex;
+  justify-content: center;
+  color:white;
+}
+.footer-page h6{
+  margin: 25px;
+  font-size: 0.75rem;
+  font-weight: 200;
+}
+.header-page > div{
+  max-width: 40em;
+  padding: 15px;
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+.header-page > div > div:nth-child(1){ 
+  width: 150px;
+}
+.header-page > div > div:nth-child(3){ 
+  width: 150px;
+}
+.content-page{
+  display: flex;
+  justify-content: center;
+} 
+.content-page > div{
+  max-width: 40em;
+  width: 100%;
+} 
+.introduction{
+  height: 75vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+/** Tabs Styles */
+
+.tabs {
+  position: relative;   
+  min-height: 150vh; /* This part sucks */
+  clear: both;
+  margin: 25px 0;
+  display: flex;
+  justify-content:center;
+}
+.tab {
+  float: left;
+  
+}
+.tab > label {
+  background: #eee; 
+  padding: 10px; 
+  border: 1px solid #ccc; 
+  margin-left: -1px; 
+  position: relative;
+  left: 1px; 
+}
+.tab [type=radio] {
+  display: none;   
+}
+.content {
+  position: absolute;
+  top: 28px;
+  left: 0;
+  background: white;
+  right: 0;
+  bottom: 0;
+  padding: 20px;
+  border: 1px solid #ccc; 
+}
+.content h2{
+  padding-top: 30px;
+  padding-bottom: 10px;
+}
+[type=radio]:checked ~ label {
+  background: white;
+  border-bottom: 1px solid white;
+  z-index: 2;
+}
+[type=radio]:checked ~ label ~ .content {
+  z-index: 1;
+}
+label:hover {
+  color: var(--primary-color);
+  cursor: pointer;
 }

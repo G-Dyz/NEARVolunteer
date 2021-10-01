@@ -33,7 +33,7 @@ const App = ({ contract, currentUser, nearConfig, wallet }) => {
   useEffect(() => {
     // TODO: don't just fetch once; subscribe!
 
-    contract.getAllMessages().then((messages) => {
+    contract.getAllCertificates().then((messages) => {
       setMessages(filterMessage(messages));
       // setMessages(messages);
     });
@@ -59,7 +59,7 @@ const App = ({ contract, currentUser, nearConfig, wallet }) => {
       const event = filterEventByCode(events, message.value);
       if (event != null && event[0] != null) {
         contract
-          .addMessage(
+          .addCertificate(
             {
               text: event[0].text,
             },
@@ -69,7 +69,7 @@ const App = ({ contract, currentUser, nearConfig, wallet }) => {
             //   .toFixed()
           )
           .then(() => {
-            contract.getAllMessages().then((messages) => {
+            contract.getAllCertificates().then((messages) => {
               setMessages(filterMessage(messages));
               // setMessages(messages);
               message.value = "";
@@ -132,48 +132,92 @@ const App = ({ contract, currentUser, nearConfig, wallet }) => {
   };
 
   return (
-    <main>
+    <>
       <header className="header-page">
-        <h1>NEAR Attendance Certificate</h1>
-        <div className="control-button">
-          {currentUser ? (
-            <button onClick={signOut}>Log out</button>
-          ) : (
-            <button onClick={signIn}>Log in</button>
-          )}
+        <div>
+          <div></div>
+          <div>
+            <h1>NEAR Volunteer</h1>
+          </div>
+          <div className="control-button">
+            {currentUser ? (
+              <button onClick={signOut}>Log out</button>
+            ) : (
+              <button onClick={signIn}>Log in</button>
+            )}
+          </div>
         </div>
       </header>
+      <div className="content-page">
+        {currentUser ? (
+          <div>
+            <div className="tabs">
+              <div className="tab">
+                <input type="radio" id="tab-1" name="tab-group-1" checked />
+                <label for="tab-1">Certificates</label>
 
-      {/* CERTIFICATES */}
+                <div className="content">
+                  {/* CERTIFICATES */}
 
-      {currentUser ? (
-        <Form onSubmit={onSubmit} currentUser={currentUser} />
-      ) : (
-        <SignIn />
-      )}
-      {!!currentUser && !!messages.length && (
-        <Messages messages={messages} title="Your certficates" />
-      )}
+                  {currentUser ? (
+                    <Form onSubmit={onSubmit} currentUser={currentUser} />
+                  ) : (
+                    <SignIn />
+                  )}
+                  {!!currentUser && !!messages.length && (
+                    <Messages
+                      messages={messages}
+                      title="Your certficates"
+                      type="certificate"
+                    />
+                  )}
+                </div>
+              </div>
 
-      {/* EVENTS */}
+              <div className="tab">
+                <input type="radio" id="tab-2" name="tab-group-1" />
+                <label for="tab-2">Events</label>
 
-      {currentUser ? (
-        <FormEvent onSubmit={onSubmitEvent} currentUser={currentUser} />
-      ) : (
-        <SignIn />
-      )}
-      {!!currentUser && !!events.length && (
-        <Messages messages={events} title="Your events" />
-      )}
-    </main>
+                <div className="content">
+                  {/* EVENTS */}
+
+                  {currentUser ? (
+                    <FormEvent
+                      onSubmit={onSubmitEvent}
+                      currentUser={currentUser}
+                    />
+                  ) : (
+                    <SignIn />
+                  )}
+                  {!!currentUser && !!events.length && (
+                    <Messages
+                      messages={events}
+                      title="Your events"
+                      type="event"
+                    />
+                  )}
+                </div>
+              </div>
+            </div>
+          </div>
+        ) : (
+          <div className="introduction">
+            <SignIn />
+          </div>
+        )}
+      </div>
+      <footer className="footer-page">
+        <h6>Developer by Team NEAR Colab</h6>
+      </footer>
+    </>
   );
 };
 
 App.propTypes = {
   contract: PropTypes.shape({
-    addMessage: PropTypes.func.isRequired,
-    getMessages: PropTypes.func.isRequired,
-    getAllMessages: PropTypes.func.isRequired,
+    addCertificate: PropTypes.func.isRequired,
+    getCertificates: PropTypes.func.isRequired,
+    getAllCertificates: PropTypes.func.isRequired,
   }).isRequired,
   currentUser: PropTypes.shape({
     accountId: PropTypes.string.isRequired,
