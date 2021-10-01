@@ -1,16 +1,9 @@
-**NEARVolunteer** is a smart contract that allows ...
+**NEAR Volunteer** 
+NEAR Volunteer is a dApp that allows people to collect certificates every time they volunteer. Volunteer events are created by hosts, who determine the period in which the certificate can be claimed.
 
-Guest Book
-==========
+Volunteers who have certificates can receive rewards and invitations. Also these volunteers are the only ones who will be able to rate the event and generate suggestions. In addition, volunteers can build a reputation for their level of participation.
 
-[![Build Status](https://travis-ci.com/near-examples/guest-book.svg?branch=master)](https://travis-ci.com/near-examples/guest-book)
-
-[![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/#https://github.com/near-examples/guest-book)
-
-<!-- MAGIC COMMENT: DO NOT DELETE! Everything above this line is hidden on NEAR Examples page -->
-
-Sign in with [NEAR] and add a message to the guest book! A starter app built with an [AssemblyScript] backend and a [React] frontend.
-
+The process can be improved, if you will create a reputation mechanism, and only those volunteers with a reputation level (number of certificates) can generate events, thus avoiding unnecessary imitations or events being created.
 
 Quick Start
 ===========
@@ -101,6 +94,31 @@ As you can see in `package.json`, this does two things:
 
 1. builds & deploys smart contracts to NEAR TestNet
 2. builds & deploys frontend code to GitHub using [gh-pages]. This will only work if the project already has a repository set up on GitHub. Feel free to modify the `deploy` script in `package.json` to deploy elsewhere.
+
+
+Step 5: 📑 Exploring the NEAR Volunteer smart contract methods!
+---------------
+
+### Command to add an event:
+    near view aysel.testnet getAllEvents 
+
+### Command to get all the events:
+    near call <id_of_your_smart_contract> addEvent '{"text":"path of your certificate","code":"code","dateStart":"XXXX-XX-XX","dateEnd":"XXXX-XX-XX"}' --account-id <your_account.testnet>
+
+Example:
+
+    near call aysel.testnet addEvent '{"text":"http://www.relal.org.co/images/Redes_RELAL/Voluntariado/Logo-Voluntariado.jpg","code":"123234","dateStart":"2021-10-02","dateEnd":"2021-10-04"}' --account-id aysel.testnet
+
+### Command to add a certificate:
+    near view aysel.testnet getAllCertificates 
+
+### Command to get all the certificates:
+    near call <id_of_your_smart_contract> addCertificate '{"text":"path of your certificate"}' --account-id <your_account.testnet>
+
+Example:
+
+    near call aysel.testnet addCertificate '{"text":"123234"}' --account-id aysel.testnet
+
 
 
 
