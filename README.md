@@ -1,3 +1,5 @@
+**NEARVolunteer** is a smart contract that allows ...
+
 Guest Book
 ==========
 
