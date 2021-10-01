@@ -22,6 +22,9 @@ const App = ({ contract, currentUser, nearConfig, wallet }) => {
       (message) => message.sender == currentUser.accountId
     );
   };
+  const filterEvents = (events) => {
+    return events.filter((event) => event.sender == currentUser.accountId);
+  };
   const filterEventByCode = (events, code) => {
     return events.filter((event) => event.codeEvent == code);
   };
@@ -38,7 +41,7 @@ const App = ({ contract, currentUser, nearConfig, wallet }) => {
       // setMessages(messages);
     });
     contract.getAllEvents().then((events) => {
-      setEvents(events);
+      setEvents(filterEvents(events));
       // setMessages(messages);
     });
   }, []);
@@ -55,32 +58,31 @@ const App = ({ contract, currentUser, nearConfig, wallet }) => {
     // add uuid to each message, so we know which one is already known
 
     // validate event
-    contract.getAllEvents().then((events) => {
-      const event = filterEventByCode(events, message.value);
-      if (event != null && event[0] != null) {
-        contract
-          .addCertificate(
-            {
-              text: event[0].text,
-            },
-            BOATLOAD_OF_GAS
-            // Big(donation.value || "0")
-            //   .times(10 ** 24)
-            //   .toFixed()
-          )
-          .then(() => {
-            contract.getAllCertificates().then((messages) => {
-              setMessages(filterMessage(messages));
-              // setMessages(messages);
-              message.value = "";
-              // donation.value = SUGGESTED_DONATION;
-              fieldset.disabled = false;
-              message.focus();
-            });
-          });
-      }
-      // setMessages(messages);
-    });
+    contract
+      .addCertificate(
+        {
+          text: message.value,
+        },
+        BOATLOAD_OF_GAS
+        // Big(donation.value || "0")
+        //   .times(10 ** 24)
+        //   .toFixed()
+      )
+      .then((result) => {
+        if (result) {
+          alert("Se creo con exito!");
+        } else {
+          alert("Este evento no esta disponible!");
+        }
+        contract.getAllCertificates().then((messages) => {
+          setMessages(filterMessage(messages));
+          // setMessages(messages);
+          message.value = "";
+          // donation.value = SUGGESTED_DONATION;
+          fieldset.disabled = false;
+          message.focus();
+        });
+      });
   };
 
   const onSubmitEvent = (e) => {
@@ -109,7 +111,7 @@ const App = ({ contract, currentUser, nearConfig, wallet }) => {
       )
       .then(() => {
         contract.getAllEvents().then((events) => {
-          setEvents(filterMessage(events));
+          setEvents(filterEvents(events));
           // setMessages(messages);
           message.value = "";
           // donation.value = SUGGESTED_DONATION;
@@ -153,8 +155,8 @@ const App = ({ contract, currentUser, nearConfig, wallet }) => {
           <div>
             <div className="tabs">
               <div className="tab">
-                <input type="radio" id="tab-1" name="tab-group-1" checked />
-                <label for="tab-1">Certificates</label>
+                <input type="radio" id="tab-1" name="tab-group-1" />
+                <label htmlFor="tab-1">Certificates</label>
 
                 <div className="content">
                   {/* CERTIFICATES */}
@@ -176,7 +178,7 @@ const App = ({ contract, currentUser, nearConfig, wallet }) => {
 
               <div className="tab">
                 <input type="radio" id="tab-2" name="tab-group-1" />
-                <label for="tab-2">Events</label>
+                <label htmlFor="tab-2">Events</label>
 
                 <div className="content">
                   {/* EVENTS */}
