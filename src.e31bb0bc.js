@@ -32725,7 +32725,7 @@ App.propTypes = {
 var _default = App;
 exports.default = _default;
 },{"regenerator-runtime/runtime":"../node_modules/regenerator-runtime/runtime.js","react":"../node_modules/react/index.js","prop-types":"../node_modules/prop-types/index.js","big.js":"../node_modules/big.js/big.js","./components/Form":"components/Form.jsx","./components/FormEvent":"components/FormEvent.jsx","./components/SignIn":"components/SignIn.jsx","./components/Messages":"components/Messages.jsx"}],"config.js":[function(require,module,exports) {
-const CONTRACT_NAME = undefined || "tammm.testnet";
+const CONTRACT_NAME = undefined || "aysel.testnet";
 
 function getConfig(env) {
   switch (env) {
@@ -49053,7 +49053,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "58093" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "60916" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
