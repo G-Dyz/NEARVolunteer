@@ -143,6 +143,9 @@ Add more ideas in the mockup figma, that'll be great to have more ideas
 
 https://www.figma.com/file/gnhw58NXOAVfYnl7sg13zr/NEAR-Volunteer?node-id=0%3A1
 
+Explanation:
+
+https://www.loom.com/share/2fe1fdce64d74a55ba42c4766231e2bc
 
 
   [NEAR]: https://nearprotocol.com/
