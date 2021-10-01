@@ -132,40 +132,84 @@ const App = ({ contract, currentUser, nearConfig, wallet }) => {
   };
 
   return (
-    <main>
+    <>
       <header className="header-page">
-        <h1>NEAR Attendance Certificate</h1>
-        <div className="control-button">
-          {currentUser ? (
-            <button onClick={signOut}>Log out</button>
-          ) : (
-            <button onClick={signIn}>Log in</button>
-          )}
+        <div>
+          <div></div>
+          <div>
+            <h1>NEAR Volunteer</h1>
+          </div>
+          <div className="control-button">
+            {currentUser ? (
+              <button onClick={signOut}>Log out</button>
+            ) : (
+              <button onClick={signIn}>Log in</button>
+            )}
+          </div>
         </div>
       </header>
+      <div className="content-page">
+        {currentUser ? (
+          <div>
+            <div className="tabs">
+              <div className="tab">
+                <input type="radio" id="tab-1" name="tab-group-1" checked />
+                <label for="tab-1">Certificates</label>
 
-      {/* CERTIFICATES */}
+                <div className="content">
+                  {/* CERTIFICATES */}
 
-      {currentUser ? (
-        <Form onSubmit={onSubmit} currentUser={currentUser} />
-      ) : (
-        <SignIn />
-      )}
-      {!!currentUser && !!messages.length && (
-        <Messages messages={messages} title="Your certficates" />
-      )}
+                  {currentUser ? (
+                    <Form onSubmit={onSubmit} currentUser={currentUser} />
+                  ) : (
+                    <SignIn />
+                  )}
+                  {!!currentUser && !!messages.length && (
+                    <Messages
+                      messages={messages}
+                      title="Your certficates"
+                      type="certificate"
+                    />
+                  )}
+                </div>
+              </div>
 
-      {/* EVENTS */}
+              <div className="tab">
+                <input type="radio" id="tab-2" name="tab-group-1" />
+                <label for="tab-2">Events</label>
 
-      {currentUser ? (
-        <FormEvent onSubmit={onSubmitEvent} currentUser={currentUser} />
-      ) : (
-        <SignIn />
-      )}
-      {!!currentUser && !!events.length && (
-        <Messages messages={events} title="Your events" />
-      )}
-    </main>
+                <div className="content">
+                  {/* EVENTS */}
+
+                  {currentUser ? (
+                    <FormEvent
+                      onSubmit={onSubmitEvent}
+                      currentUser={currentUser}
+                    />
+                  ) : (
+                    <SignIn />
+                  )}
+                  {!!currentUser && !!events.length && (
+                    <Messages
+                      messages={events}
+                      title="Your events"
+                      type="event"
+                    />
+                  )}
+                </div>
+              </div>
+            </div>
+          </div>
+        ) : (
+          <div className="introduction">
+            <SignIn />
+          </div>
+        )}
+      </div>
+      <footer className="footer-page">
+        <h6>Developer by Team NEAR Colab</h6>
+      </footer>
+    </>
   );
 };
 

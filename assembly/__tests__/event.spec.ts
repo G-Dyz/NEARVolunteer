@@ -34,12 +34,12 @@ describe('events tests', () => {
 
   it('retrieves events', () => {
     addEvent(path, code, dateStart, dateEnd);
-    const messagesArr = getAllEvents();
-    expect(messagesArr.length).toBe(
+    const eventArr = getAllEvents();
+    expect(eventArr.length).toBe(
       1,
       'should be one event'
     );
-    expect(messagesArr).toIncludeEqual(
+    expect(eventArr).toIncludeEqual(
       event,
       'event should include:\n' + event.toJSON()
     );
