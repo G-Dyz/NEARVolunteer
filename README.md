@@ -1,145 +1,146 @@
-**NEAR Volunteer** 
-NEAR Volunteer is a dApp that allows people to collect certificates every time they volunteer. Volunteer events are created by hosts, who determine the period in which the certificate can be claimed.
+**NEAR de voluntario**
 
-Volunteers who have certificates can receive rewards and invitations. Also these volunteers are the only ones who will be able to rate the event and generate suggestions. In addition, volunteers can build a reputation for their level of participation.
+NEARVolunteer es una dApp que permite a las personas recolectar certificados cada vez que participan en un voluntariado. Los eventos de voluntariado son creados por anfitriones, los cuales determinan el periodo en el que se podrá reclamar el certificado.
 
-The process can be improved, if you will create a reputation mechanism, and only those volunteers with a reputation level (number of certificates) can generate events, thus avoiding unnecessary imitations or events being created.
+Los voluntarios que tengan certificados, podrán recibir recompensas e invitaciones. También estos voluntarios son los únicos que podrán calificar el evento y generar sugerencias. Además los voluntarios pueden formarse una reputación por su nivel de participación.
 
-Quick Start
+El proceso puede ser mejorado, si creará un mecanismo de reputación, y solo aquellos voluntarios con un nivel de reputación(número de certificados) pueden generar eventos, de esa manera se evita que se creen imitaciones o eventos innecesarios.
+
+Inicio rápido
 ===========
 
-To run this project locally:
+Para ejecutar este proyecto localmente:
 
-1. Prerequisites: Make sure you have Node.js ≥ 12 installed (https://nodejs.org), then use it to install [yarn]: `npm install --global yarn` (or just `npm i -g yarn`)
-2. Run the local development server: `yarn && yarn dev` (see `package.json` for a
-   full list of `scripts` you can run with `yarn`)
+1. Requisitos previos: asegúrese de tener Node.js ≥ 12 instalado (https://nodejs.org), luego úselo para instalar [yarn]: `npm install --global yarn` (o simplemente` npm i -g yarn `)
+2. Ejecute el servidor de desarrollo local: `yarn && yarn dev` (consulte` package.json` para
+   lista completa de `scripts` que puede ejecutar con` yarn`)
 
-Now you'll have a local development environment backed by the NEAR TestNet! Running `yarn dev` will tell you the URL you can visit in your browser to see the app.
+¡Ahora tendrá un entorno de desarrollo local respaldado por NEAR TestNet! Ejecutar `yarn dev` te dirá la URL que puedes visitar en tu navegador para ver la aplicación.
 
 
-Exploring The Code
+Explorando el código
 ==================
 
-1. The backend code lives in the `/assembly` folder. This code gets deployed to
-   the NEAR blockchain when you run `yarn deploy:contract`. This sort of
-   code-that-runs-on-a-blockchain is called a "smart contract" – [learn more
-   about NEAR smart contracts][smart contract docs].
-2. The frontend code lives in the `/src` folder.
-   [/src/index.html](/src/index.html) is a great place to start exploring. Note
-   that it loads in `/src/index.js`, where you can learn how the frontend
-   connects to the NEAR blockchain.
-3. Tests: there are different kinds of tests for the frontend and backend. The
-   backend code gets tested with the [asp] command for running the backend
-   AssemblyScript tests, and [jest] for running frontend tests. You can run
-   both of these at once with `yarn test`.
+1. El código de backend vive en la carpeta `/ assembly`. Este código se implementa en
+   la cadena de bloques NEAR cuando ejecuta `yarn deploy: contract`. Este tipo de
+   el código que se ejecuta en una cadena de bloques se denomina "contrato inteligente" - [más información
+   acerca de los contratos inteligentes NEAR] [documentos de contratos inteligentes].
+2. El código de la interfaz reside en la carpeta `/ src`.
+   [/src/index.html](/src/index.html) es un excelente lugar para comenzar a explorar. Nota
+   que carga en `/ src / index.js`, donde puede aprender cómo la interfaz
+   se conecta a la cadena de bloques NEAR.
+3. Pruebas: existen diferentes tipos de pruebas para el frontend y el backend. los
+   el código de backend se prueba con el comando [asp] para ejecutar el backend
+   Pruebas de AssemblyScript y [jest] para ejecutar pruebas de frontend. Tu puedes correr
+   ambos a la vez con "prueba de hilo".
 
-Both contract and client-side code will auto-reload as you change source files.
+Tanto el código del lado del cliente como del contrato se recargarán automáticamente a medida que cambie los archivos de origen.
 
 
-Deploy
+Desplegar
 ======
 
-Every smart contract in NEAR has its [own associated account][NEAR accounts]. When you run `yarn dev`, your smart contracts get deployed to the live NEAR TestNet with a throwaway account. When you're ready to make it permanent, here's how.
+Cada contrato inteligente en NEAR tiene su [propia cuenta asociada] [NEAR cuentas]. Cuando ejecuta `yarn dev`, sus contratos inteligentes se implementan en NEAR TestNet en vivo con una cuenta desechable. Cuando esté listo para hacerlo permanente, aquí le explicamos cómo hacerlo.
 
 
-Step 0: Install near-cli
+Paso 0: Instale near-cli
 --------------------------
 
-You need near-cli installed globally. Here's how:
+Necesita near-cli instalado globalmente. Así es cómo:
 
     npm install --global near-cli
 
-This will give you the `near` [CLI] tool. Ensure that it's installed with:
+Esto le dará la herramienta "near" [CLI]. Asegúrese de que esté instalado con:
 
-    near --version
+    casi --versión
 
 
-Step 1: Create an account for the contract
+Paso 1: crea una cuenta para el contrato
 ------------------------------------------
 
-Visit [NEAR Wallet] and make a new account. You'll be deploying these smart contracts to this new account.
+Visite [NEAR Wallet] y cree una nueva cuenta. Implementarás estos contratos inteligentes en esta nueva cuenta.
 
-Now authorize NEAR CLI for this new account, and follow the instructions it gives you:
+Ahora autorice NEAR CLI para esta nueva cuenta y siga las instrucciones que le da:
 
-    near login
+    cerca de inicio de sesión
 
 
-Step 2: set contract name in code
+Paso 2: establezca el nombre del contrato en el código
 ---------------------------------
 
-Modify the line in `src/config.js` that sets the account name of the contract. Set it to the account id you used above.
+Modifique la línea en `src / config.js` que establece el nombre de cuenta del contrato. Configúrelo con la identificación de cuenta que utilizó anteriormente.
 
-    const CONTRACT_NAME = process.env.CONTRACT_NAME || 'your-account-here!'
+    const CONTRACT_NAME = process.env.CONTRACT_NAME || 'tu-cuenta-aquí!'
 
 
-Step 3: change remote URL if you cloned this repo 
+Paso 3: cambie la URL remota si clonó este repositorio
 -------------------------
 
-Unless you forked this repository you will need to change the remote URL to a repo that you have commit access to. This will allow auto deployment to Github Pages from the command line.
+A menos que haya bifurcado este repositorio, deberá cambiar la URL remota a un repositorio al que tenga acceso de confirmación. Esto permitirá la implementación automática en Github Pages desde la línea de comandos.
 
-1) go to GitHub and create a new repository for this project
-2) open your terminal and in the root of this project enter the following:
+1) vaya a GitHub y cree un nuevo repositorio para este proyecto
+2) abre tu terminal y en la raíz de este proyecto ingresa lo siguiente:
 
-    $ `git remote set-url origin https://github.com/YOUR_USERNAME/YOUR_REPOSITORY.git`
+    $ `git remote set-url origin https: // github.com / YOUR_USERNAME / YOUR_REPOSITORY.git`
 
 
-Step 4: deploy!
+Paso 4: ¡despliegue!
 ---------------
 
-One command:
+Un comando:
 
-    yarn deploy
+    despliegue de hilo
 
-As you can see in `package.json`, this does two things:
+Como puede ver en `package.json`, esto hace dos cosas:
 
-1. builds & deploys smart contracts to NEAR TestNet
-2. builds & deploys frontend code to GitHub using [gh-pages]. This will only work if the project already has a repository set up on GitHub. Feel free to modify the `deploy` script in `package.json` to deploy elsewhere.
+1. crea e implementa contratos inteligentes en NEAR TestNet
+2. construye e implementa código frontend en GitHub usando [gh-pages]. Esto solo funcionará si el proyecto ya tiene un repositorio configurado en GitHub. Siéntase libre de modificar el script `deploy` en` package.json` para implementarlo en otro lugar.
 
 
-Step 5: 📑 Exploring the NEAR Volunteer smart contract methods!
+Paso 5: 📑 ¡Explorando los métodos de contrato inteligente de NEAR Volunteer!
 ---------------
 
-### Command to add an event:
+### Comando para agregar un evento:
     near view aysel.testnet getAllEvents 
 
-### Command to get all the events:
+### Comando para obtener todos los eventos:
     near call <id_of_your_smart_contract> addEvent '{"text":"path of your certificate","code":"code","dateStart":"XXXX-XX-XX","dateEnd":"XXXX-XX-XX"}' --account-id <your_account.testnet>
 
-Example:
+Ejemplo:
 
     near call aysel.testnet addEvent '{"text":"http://www.relal.org.co/images/Redes_RELAL/Voluntariado/Logo-Voluntariado.jpg","code":"123234","dateStart":"2021-10-02","dateEnd":"2021-10-04"}' --account-id aysel.testnet
 
-### Command to add a certificate:
+### Comando para agregar un certificado:
     near view aysel.testnet getAllCertificates 
 
-### Command to get all the certificates:
+### Comando para obtener todos los certificados:
     near call <id_of_your_smart_contract> addCertificate '{"text":"path of your certificate"}' --account-id <your_account.testnet>
 
-Example:
+Ejemplo:
 
     near call aysel.testnet addCertificate '{"text":"123234"}' --account-id aysel.testnet
 
-Step 6: 📑 Exploring the NEAR Volunteer tests!
+Paso 6: 📑 ¡Explorando las pruebas de NEAR Volunteer!
 ---------------
-### Smart contract tests
+### Pruebas de contratos inteligentes
 
     yarn asp
 
-### Integration & UI tests 
+### Pruebas de integración y UI
 
     yarn jest
 
-### All tests
+### Todas las pruebas
 
     npm run test
 
-Step 7: 📑 Exploring the NEAR Volunteer on live!
+Paso 7: 📑 ¡Explorando el NEAR Volunteer en vivo!
 ---------------
-Login in your near wallet, create events and claim your certificates
+Inicie sesión en su billetera cercana, cree eventos y reclame sus certificados
 
 https://near-volunteer.vercel.app/
 
-Add more ideas in the mockup figma, that'll be great to have more ideas
+Agregue más ideas en la figma de la maqueta, será genial tener más ideas
 
 https://www.figma.com/file/gnhw58NXOAVfYnl7sg13zr/NEAR-Volunteer?node-id=0%3A1
 
