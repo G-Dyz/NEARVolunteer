@@ -119,6 +119,27 @@ Example:
 
     near call aysel.testnet addCertificate '{"text":"123234"}' --account-id aysel.testnet
 
+Step 6: 📑 Exploring the NEAR Volunteer tests!
+---------------
+### Smart contract tests
+
+    yarn asp
+
+### Integration & UI tests 
+
+    yarn jest
+
+### All tests
+
+    npm run test
+
+Step 7: 📑 Exploring the NEAR Volunteer on live!
+---------------
+    Login in your near wallet, create events and claim your certificates
+    https://near-volunteer.vercel.app/
+
+    Add more ideas in the mockup figma, that'll be great to have more ideas
+    https://www.figma.com/file/gnhw58NXOAVfYnl7sg13zr/NEAR-Volunteer?node-id=0%3A1
 
 
 
